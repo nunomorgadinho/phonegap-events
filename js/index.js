@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+ var count = 0; //number of secs app has been paused
+ var pauseInterval;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -41,6 +43,33 @@ var app = {
 
          $('#appdata').append("Device Ready <br><br>");
 
-    }
+         document.addEventListener("pause", onPause, false);
+         document.addEventListener("resume", onResume, false);
+         document.addEventListener("menubutton", onMenuBtnDown, false);
+         document.addEventListener("backbutton", onBackBtnDown, false);
+    },
+    onPause: function() {
 
+        $('#appdata').append("App Paused <br><br>");
+        pauseInterval = setInterval(app.countPause, 1000);
+
+    },
+    onResume: function() {
+
+        $('#appdata').append("App Resumed <br><br>");
+        clearInterval(pauseInterval);
+        count = 0;
+
+    },
+    countPause: function() {
+        count++;
+    },
+    onMenuBtnDown: function() {
+         e.preventDefault();
+         $('#appdata').append("Menu Button Pressed <br><br>");
+    },
+    onBackBtnDown: function(e) {
+        e.preventDefault();
+        $('#appdata').append("Back Button Pressed <br><br>");
+    }
 };
