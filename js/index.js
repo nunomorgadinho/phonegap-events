@@ -64,7 +64,7 @@ var app = {
     countPause: function() {
         count++;
     },
-    onMenuBtnDown: function() {
+    onMenuBtnDown: function(e) {
          e.preventDefault();
          $('#appdata').append("Menu Button Pressed <br><br>");
     },
